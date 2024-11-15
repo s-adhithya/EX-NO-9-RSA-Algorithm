@@ -36,11 +36,58 @@ Step 5: **Security Foundation
 The security of RSA relies on the difficulty of factoring large numbers; thus, choosing sufficiently large prime numbers for \( p \) and \( q \) is crucial for security.
 
 ## Program:
-
-
+```
+#include <stdio.h>
+ #include <math.h>
+ // Function to compute GCD
+ int gcd(int a, int h) {
+    int temp;
+    while(1) {
+        temp = a % h;
+        if (temp == 0)
+            return h;
+        a = h;
+        h = temp;
+    }
+ }
+ int main() {
+    printf("Adhithya - 212222240003\n");
+    // Two prime numbers
+    int p = 3;
+    int q = 7;
+    
+    // Public and private keys
+    int n = p * q;
+    int phi = (p - 1) * (q - 1);
+    int e = 2;
+    // Find e such that gcd(e, phi) = 1
+    while (e < phi) {
+        if (gcd(e, phi) == 1)
+            break;
+        else
+            e++;
+    }
+    // Choose k (integer multiplier)
+    int k = 2;
+    
+    // Calculate d (Private key)
+    int d = (1 + (k * phi)) / e;
+    // Message to be encrypted
+    int msg = 24;
+     printf("Message data = %d\n", msg);
+ // Encryption: c = (msg ^ e) % n
+ long long c = (long long)pow(msg, e) % n;
+ printf("Encrypted data = %lld\n", c);
+ // Decryption: m = (c ^ d) % n
+ long long m = (long long)pow(c, d) % n;
+ printf("Original Message Sent = %lld\n", m);
+ return 0;
+ }
+```
 
 
 ## Output:
+![Screenshot 2024-11-15 120300](https://github.com/user-attachments/assets/af9f2c8f-1a71-40d1-beba-c974c21cdd2e)
 
 
 
